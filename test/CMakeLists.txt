@@ -3,3 +3,6 @@ target_link_libraries(test1 cppweb cppjson)
 
 add_executable(testRpcError testRpcError.cpp)
 target_link_libraries(testRpcError cpprpc cppweb cppjson)
+
+add_executable(testException testException.cpp)
+target_link_libraries(testException cpprpc cppweb cppjson)
