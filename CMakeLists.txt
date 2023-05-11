@@ -6,7 +6,12 @@ add_definitions("-std=c++14 -g")#定义编译器参数
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
+# 包含第三方库的头文件路径
+include_directories(thirdparty/)
 
 add_subdirectory(src)
 add_subdirectory(test)
 
+#第三方库
+add_subdirectory(thirdparty/cppweb)
+add_subdirectory(thirdparty/cppjson)
