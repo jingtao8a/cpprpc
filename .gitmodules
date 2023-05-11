@@ -1,0 +1,6 @@
+[submodule "thirdparty/cppweb"]
+	path = thirdparty/cppweb
+	url = https://gitee.com/jingtao8a/cppweb.git
+[submodule "thirdparty/cppjson"]
+	path = thirdparty/cppjson
+	url = https://gitee.com/jingtao8a/cppjson.git
