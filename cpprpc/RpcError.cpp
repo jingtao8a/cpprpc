@@ -1,4 +1,4 @@
-#include "RpcError.hpp"
+#include <cpprpc/RpcError.hpp>
 
 namespace CPPRPC {
 
@@ -15,13 +15,13 @@ Error RpcError::fromErrorCode(int32_t code) {
 
 const int32_t RpcError::errorCode[] = {
 #define GEN_ERROR_CODE(e, c, n) c,
-    ERROR_MAP(GEN_ERROR_CODE)
+    RPC_ERROR_MAP(GEN_ERROR_CODE)
 #undef GEN_ERROR_CODE
 };
 
 const char* RpcError::errorString[] = {
 #define GEN_STRERR(e, c, n) n,
-    ERROR_MAP(GEN_STRERR)
+    RPC_ERROR_MAP(GEN_STRERR)
 #undef GEN_STRERR
 };
 

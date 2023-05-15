@@ -1,8 +1,8 @@
 #ifndef CPPRPC_RPCSERVICE_HPP
 #define CPPRPC_RPCSERVICE_HPP
 
-#include "NotifyProcedure.hpp"
-#include "ReturnProcedure.hpp"
+#include <cpprpc/server/NotifyProcedure.hpp>
+#include <cpprpc/server/ReturnProcedure.hpp>
 #include <cppweb/nocopyable.hpp>
 #include <memory>
 #include <unordered_map>

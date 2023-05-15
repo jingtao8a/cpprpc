@@ -1,5 +1,5 @@
-#include "StubGenerator.hpp"
-#include "../Exception.hpp"
+#include <cpprpc/stub/StubGenerator.hpp>
+#include <cpprpc/Exception.hpp>
 #include <unordered_set>
 
 namespace CPPRPC {

@@ -3,7 +3,7 @@
 
 #include <exception>
 #include <memory>
-#include "RpcError.hpp"
+#include <cpprpc/RpcError.hpp>
 #include <cppjson/Value.hpp>
 
 namespace CPPRPC {

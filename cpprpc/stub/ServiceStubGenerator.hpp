@@ -1,7 +1,7 @@
 #ifndef CPPRPC_SERVICESTUBGENERATOR_HPP
 #define CPPRPC_SERVICESTUBGENERATOR_HPP
 
-#include "StubGenerator.hpp"
+#include <cpprpc/stub/StubGenerator.hpp>
 
 namespace CPPRPC {
 

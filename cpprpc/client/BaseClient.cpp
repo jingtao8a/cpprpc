@@ -1,5 +1,5 @@
-#include "BaseClient.hpp"
-#include "../Exception.hpp"
+#include <cpprpc/client/BaseClient.hpp>
+#include <cpprpc/Exception.hpp>
 #include <cppjson/StringWriteStream.hpp>
 #include <cppjson/Writer.hpp>
 #include <cppjson/Document.hpp>
@@ -94,21 +94,22 @@ void BaseClient::handleResponse(std::string& json) {
     if (err != cppjson::PARSE_OK) {
         throw ResponseException(cppjson::ParseErrorStr(err));
     }
-
+    size_t n;
     switch (response.getType()) {
-    case cppjson::TYPE_OBJECT:
-        handleSingleResponse(response);
-        break;
-    case cppjson::TYPE_ARRAY:
-        size_t n = response.getSize();
-        if (n == 0) {
-            throw ResponseException("batch response is empty");
-        }
-        for (size_t i = 0; i < n; ++i) {
-            handleSingleResponse(response[i]);
-        }
-    default:
-        break;
+        case cppjson::TYPE_OBJECT:
+            handleSingleResponse(response);
+            break;
+        case cppjson::TYPE_ARRAY:
+            n = response.getSize();
+            if (n == 0) {
+                throw ResponseException("batch response is empty");
+            }
+            for (size_t i = 0; i < n; ++i) {
+                handleSingleResponse(response[i]);
+            }
+            break;
+        default:
+            throw ResponseException("response must be TYPE_OBJECT or TYPE_ARRAY");
     }
 }
 

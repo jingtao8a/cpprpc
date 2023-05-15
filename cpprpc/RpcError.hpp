@@ -5,7 +5,7 @@
 #include <stdint.h>
 namespace CPPRPC {
 
-#define ERROR_MAP(XX) \
+#define RPC_ERROR_MAP(XX) \
   XX(PARSE_ERROR, -32700, "Parse error") \
   XX(INVALID_REQUEST, -32600, "Invalid request") \
   XX(METHOD_NOT_FOUND, -32601,"Method not found") \
@@ -14,7 +14,7 @@ namespace CPPRPC {
 
 enum Error {
 #define GEN_ERRNO(e, c, s) RPC_##e,
-    ERROR_MAP(GEN_ERRNO)
+    RPC_ERROR_MAP(GEN_ERRNO)
 #undef GEN_ERRNO
 };
 

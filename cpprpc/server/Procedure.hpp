@@ -15,23 +15,18 @@ public:
         constexpr int n = sizeof...(nameAndTypes);
         static_assert(n % 2 == 0, "procedure must have param name and type pairs");
         if (n > 0) {
-            initProcedure(nameAndTypes);
+            initProcedure(nameAndTypes...);
         }
     }
 
 private:
     template<typename Name, typename... ParamNameAndTypes>
     void initProcedure(Name paramName, cppjson::ValueType paramType, ParamNameAndTypes&& ...nameAndTypes) {
-        static(std::is_same<Name, const char*>::value || std::is_same<Name, std::string>::value, "param name must be \'const char*\' or \'std::string_view\'")
+        static_assert(std::is_same<Name, const char*>::value || std::is_same<Name, std::string>::value, "param name must be \'const char*\' or \'std::string_view\'");
         m_params.emplace_back(paramName, paramType);
         if (sizeof...(nameAndTypes) > 0) {
-            initProcedure(nameAndTypes);
+            initProcedure(nameAndTypes...);
         }
-    }
-
-    template<typename Name, typename Type, typename... ParamNameAndTypes>
-    void initProcedure(Name paramName, Type paramType, ParamNameAndTypes... nameAndTypes) {
-        static_assert(false, "param type must be cppjson::ValueType");
     }
 
 protected:

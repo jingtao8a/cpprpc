@@ -1,5 +1,5 @@
-#include "NotifyProcedure.hpp"
-#include "../Exception.hpp"
+#include <cpprpc/server/NotifyProcedure.hpp>
+#include <cpprpc/Exception.hpp>
 
 namespace CPPRPC{
 

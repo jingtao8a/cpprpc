@@ -1,8 +1,8 @@
 #ifndef CPPRPC_RPCSERVER_HPP
 #define CPPRPC_RPCSERVER_HPP
 
-#include "BaseServer.hpp"
-#include "RpcService.hpp"
+#include <cpprpc/server/BaseServer.hpp>
+#include <cpprpc/server/RpcService.hpp>
 
 namespace CPPRPC {
 

@@ -2,7 +2,7 @@
 #define CPPRPC_BASESERVER_HPP    
 
 #include <cppweb/TCPServer.hpp>
-#include "../utils.hpp"
+#include <cpprpc/utils.hpp>
 
 namespace CPPRPC {
 

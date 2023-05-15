@@ -1,8 +1,8 @@
-#include "BaseServer.hpp"
+#include <cpprpc/server/BaseServer.hpp>
 #include <cppweb/TCPClient.hpp>
 #include <cppweb/Logger.hpp>
 #include <cppweb/Singleton.hpp>
-#include "../Exception.hpp"
+#include <cpprpc/Exception.hpp>
 #include <cppjson/Document.hpp>
 #include <cppjson/StringWriteStream.hpp>
 #include <cppjson/Writer.hpp>

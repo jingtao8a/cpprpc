@@ -1,4 +1,4 @@
-#include "Procedure.hpp"
+#include <cpprpc/server/Procedure.hpp>
 
 namespace CPPRPC {
 

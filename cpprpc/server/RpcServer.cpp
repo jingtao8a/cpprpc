@@ -1,34 +1,33 @@
-#include "RpcServer.hpp"
+#include <cpprpc/server/RpcServer.hpp>
 #include <cppweb/Logger.hpp>
 #include <cppweb/Singleton.hpp>
 #include <cppjson/Document.hpp>
-#include "../Exception.hpp"
-
+#include <cpprpc/Exception.hpp>
+#include <initializer_list>
 
 namespace CPPRPC {
 
 static auto& logger = CPPWEB::Singleton<CPPWEB::Logger>::GetInstance();
 
-template<cppjson::ValueType dst, cppjson::ValueType... rest>
-static void checkValueType(cppjson::ValueType type) {
-    if (dst == type) {
-        return;
+static void checkValueType(cppjson::ValueType type, std::initializer_list<cppjson::ValueType> types) {
+    if (types.size() == 0) {
+        throw NotifyException(RPC_INVALID_REQUEST, "bad type of at least one field");
     }
-    if constexpr(sizeof...(rest) > 0) {
-        checkValueType<rest...>(type);
-    } else {
-        throw RequestException(RPC_INVALID_REQUEST, "bad type of at least one field");
+    for (auto dst : types) {
+        if (type == dst) {
+            return;
+        }
     }
+    throw NotifyException(RPC_INVALID_REQUEST, "bad type of at least one field");
 }
-
 
 template<cppjson::ValueType... types>
 static cppjson::Value& findValue(cppjson::Value& request, const char* key) {
     auto it = request.findMember(key);
     if (it == request.getObject().end()) {
-        throw RequestException(RPC_INVALID_REQUEST, "missing at least one field");
+        throw NotifyException(RPC_INVALID_REQUEST, "missing at least one field");
     }
-    checkValueType<types...>(it->m_value.getType())
+    checkValueType(it->m_value.getType(), {types...});
     return it->m_value;
 }
 
@@ -36,7 +35,7 @@ template<cppjson::ValueType... types>
 static cppjson::Value& findValue(cppjson::Value& request, cppjson::Value& id, const char* key) {
     try {
         return findValue<types...>(request, key);
-    } catch (RequestException& e) {
+    } catch (NotifyException& e) {
         throw RequestException(e.getErr(), id, e.getDetail());//warp Exception
     }
 }
@@ -88,7 +87,7 @@ void RpcServer::handleSingleNotify(cppjson::Value& request) {
     if (it == m_serviceList.end()) {
         throw NotifyException(RPC_METHOD_NOT_FOUND, "service not found");
     }
-    auto methodName = methodName.substr(pos);
+    methodName = methodName.substr(pos);
     if (methodName.length() == 0) {
         throw NotifyException(RPC_INVALID_REQUEST, "missing method name in method");
     }
@@ -109,7 +108,7 @@ void RpcServer::handleSingleRequest(cppjson::Value& request, const RpcDoneCallba
     if (it == m_serviceList.end()) {
         throw RequestException(RPC_METHOD_NOT_FOUND, id, "service not found");
     }
-    auto methodName = methodName.substr(pos);
+    methodName = methodName.substr(pos);
     if (methodName.length() == 0) {
         throw RequestException(RPC_INVALID_REQUEST, id, "missing method name in method");
     }

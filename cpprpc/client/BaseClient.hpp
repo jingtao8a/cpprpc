@@ -1,7 +1,7 @@
 #ifndef CPPRPC_BASECLIENT_HPP
 #define CPPRPC_BASECLIENT_HPP
 
-#include "../utils.hpp"
+#include <cpprpc/utils.hpp>
 #include <cppweb/TCPClient.hpp>
 #include <unordered_map>
 

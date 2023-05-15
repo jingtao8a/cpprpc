@@ -1,5 +1,5 @@
-#include "ReturnProcedure.hpp"
-#include "../Exception.hpp"
+#include <cpprpc/server/ReturnProcedure.hpp>
+#include <cpprpc/Exception.hpp>
 
 namespace CPPRPC {
 void ReturnProcedure::invoke(cppjson::Value& request, const RpcDoneCallback& done) {

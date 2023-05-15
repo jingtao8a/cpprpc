@@ -1,6 +1,6 @@
 #ifndef CPPRPC_STUBGENERATOR_HPP
 #define CPPRPC_STUBGENERATOR_HPP
-#include "cppjson/Value.hpp"
+#include <cppjson/Value.hpp>
 
 namespace CPPRPC {
 class StubGenerator {
