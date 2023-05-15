@@ -9,6 +9,11 @@ public:
         auto result = left_value + right_value;
         done(cppjson::Value(result));
     }
+
+    void sub(int32_t left_value, int32_t right_value, const CPPRPC::UserDoneCallback& done) {
+        auto result = left_value - right_value;
+        done(cppjson::Value(result));
+    }
 };
 
 int main() {

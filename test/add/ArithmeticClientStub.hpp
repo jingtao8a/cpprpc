@@ -60,6 +60,24 @@ params.addMember(cppjson::Value("right_value"), cppjson::Value(right_value));
     m_client.sendCall(m_conn, call, cb);
 }
 
+void sub(int32_t left_value, int32_t right_value, const ResponseCallback& cb)
+{
+    cppjson::Value params(cppjson::TYPE_OBJECT);
+    
+params.addMember(cppjson::Value("left_value"), cppjson::Value(left_value));
+
+params.addMember(cppjson::Value("right_value"), cppjson::Value(right_value));
+
+
+    cppjson::Value call(cppjson::TYPE_OBJECT);
+    call.addMember(cppjson::Value("jsonrpc"), cppjson::Value("2.0"));
+    call.addMember(cppjson::Value("method"), cppjson::Value("Arithmetic.sub"));
+    call.addMember(cppjson::Value("params"), cppjson::Value(params));
+
+    assert(m_conn != nullptr);
+    m_client.sendCall(m_conn, call, cb);
+}
+
     
 
 private:

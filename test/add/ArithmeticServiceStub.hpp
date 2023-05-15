@@ -28,6 +28,10 @@ protected:
         std::bind(&ArithmeticServiceStub::addStub, this, CPPWEB::_1, CPPWEB::_2) , 
 "left_value", cppjson::TYPE_INT32, 
 "right_value", cppjson::TYPE_INT32));
+service->addReturnProcedure("sub", new ReturnProcedure(
+        std::bind(&ArithmeticServiceStub::subStub, this, CPPWEB::_1, CPPWEB::_2) , 
+"left_value", cppjson::TYPE_INT32, 
+"right_value", cppjson::TYPE_INT32));
 
 
         server.addService("Arithmetic", service);
@@ -47,6 +51,21 @@ auto right_value = params[1].getInt32();
 auto right_value = params["right_value"].getInt32();
 
         convert().add(left_value, right_value,  UserDoneCallback(request, done));
+    }
+}
+void subStub(cppjson::Value& request, const RpcDoneCallback& done) {
+    auto& params = request["params"];
+
+    if (params.isArray()) {
+        auto left_value = params[0].getInt32();
+auto right_value = params[1].getInt32();
+
+        convert().sub(left_value, right_value,  UserDoneCallback(request, done));
+    } else {
+        auto left_value = params["left_value"].getInt32();
+auto right_value = params["right_value"].getInt32();
+
+        convert().sub(left_value, right_value,  UserDoneCallback(request, done));
     }
 }
 

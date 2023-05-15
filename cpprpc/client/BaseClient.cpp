@@ -100,17 +100,8 @@ void BaseClient::handleResponse(std::string& json) {
         case cppjson::TYPE_OBJECT:
             handleSingleResponse(response);
             break;
-        case cppjson::TYPE_ARRAY:
-            n = response.getSize();
-            if (n == 0) {
-                throw ResponseException("batch response is empty");
-            }
-            for (size_t i = 0; i < n; ++i) {
-                handleSingleResponse(response[i]);
-            }
-            break;
         default:
-            throw ResponseException("response must be TYPE_OBJECT or TYPE_ARRAY");
+            throw ResponseException("response must be TYPE_OBJECT");
     }
 }
 

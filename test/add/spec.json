@@ -8,6 +8,14 @@
                 "right_value":2
             },
             "returns":3
+        },
+        {
+            "name":"sub",
+            "params":{
+                "left_value":1,
+                "right_value":2
+            },
+            "returns":-1
         }
     ]
 }

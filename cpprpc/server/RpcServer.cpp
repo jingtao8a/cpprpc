@@ -67,11 +67,8 @@ void RpcServer::handleRequest(const std::string& json, const RpcDoneCallback& do
                 handleSingleRequest(request, done);
             }
             break;
-        case cppjson::TYPE_ARRAY:
-            handleBatchRequests(request, done);
-            break;
         default:
-            throw NotifyException(RPC_INVALID_REQUEST, "request should be json object or array");
+            throw NotifyException(RPC_INVALID_REQUEST, "request should be json object");
     }
 }
 
@@ -113,56 +110,6 @@ void RpcServer::handleSingleRequest(cppjson::Value& request, const RpcDoneCallba
         throw RequestException(RPC_INVALID_REQUEST, id, "missing method name in method");
     }
     it->second->callReturnProcedure(methodName, request, done);
-}
-
-class ThreadSafeBatchResponse {
-public:
-    explicit ThreadSafeBatchResponse(const RpcDoneCallback& done): m_data(std::make_shared<ThreadSafeData>(done)) {}
-    void addResponse(cppjson::Value response) {
-        std::unique_lock<std::mutex> lock(m_data->m_mutex);
-        m_data->m_responses.addValue(response);
-    }
-private:
-    struct ThreadSafeData {
-        ThreadSafeData(const RpcDoneCallback& done): m_done(done), m_responses(cppjson::TYPE_ARRAY) {}
-        ~ThreadSafeData() {
-            m_done(m_responses);
-        }
-        std::mutex m_mutex;
-        cppjson::Value m_responses;
-        RpcDoneCallback m_done;
-    };
-private:
-    std::shared_ptr<ThreadSafeData> m_data;
-};
-void RpcServer::handleBatchRequests(cppjson::Value& requests, const RpcDoneCallback& done) {
-    size_t num = requests.getSize();
-    if (num == 0) {
-        throw NotifyException(RPC_INVALID_REQUEST, "batch request is empty");
-    }
-
-    ThreadSafeBatchResponse responses(done);
-    try {
-        size_t n = requests.getSize();
-        for (size_t i = 0; i < n; ++i) {
-            auto& request = requests[i];
-            if (!request.isObject()) {
-                throw NotifyException(RPC_INVALID_REQUEST, "request should be json object");
-            }
-            if (isNotify(request)) {
-                handleSingleNotify(request);
-            } else {
-                handleSingleRequest(request, [=](cppjson::Value response) mutable {
-                    responses.addResponse(response);
-                });
-            }
-        }
-    } catch (RequestException& e) {
-        auto response = wrapException(e);
-        responses.addResponse(response);
-    } catch (NotifyException& e) {
-        //to do
-    }
 }
 
 void RpcServer::validateRequest(cppjson::Value& request) {

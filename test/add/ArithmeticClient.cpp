@@ -18,7 +18,7 @@ int main() {
             loop.quit();
         } else {
             client.add(193, 7, responseCallback);
-            client.add(200, 9, responseCallback);
+            client.sub(200, 9, responseCallback);
         }
     });
     client.start();
