@@ -1,4 +1,4 @@
-#include "../src/RpcError.hpp"
+#include <cpprpc/RpcError.hpp>
 #include <iostream>
 
 using namespace CPPRPC;

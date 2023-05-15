@@ -1,6 +1,6 @@
-#include "cppweb/src/ThreadPool.hpp"
-#include "cppweb/src/Logger.hpp"
-#include "cppweb/src/Singleton.hpp"
+#include <cppweb/ThreadPool.hpp>
+#include <cppweb/Logger.hpp>
+#include <cppweb/Singleton.hpp>
 
 using namespace CPPWEB;
 

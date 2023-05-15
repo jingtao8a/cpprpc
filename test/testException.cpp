@@ -1,6 +1,6 @@
-#include "../src/Exception.hpp"
+#include <cpprpc/Exception.hpp>
 #include <iostream>
-#include "../src/RpcError.hpp"
+#include <cpprpc/RpcError.hpp>
 
 using namespace CPPRPC;
 
