@@ -8,7 +8,7 @@
             "name": "cppjson",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/",
+            "program": "${workspaceRoot}/bin/EchoService",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
