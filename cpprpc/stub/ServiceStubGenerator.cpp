@@ -29,7 +29,7 @@ class [userClassName];
 namespace CPPRPC {
 
 template <typename S>
-class [stubClassName]: public CPPWEB::noncopyable {
+class [stubClassName]: public CPPWEB::nocopyable {
 protected:
     explicit [stubClassName](RpcServer& server) {
         static_assert(std::is_same<S, [userClassName]>::value, "derived class name should be '[userClassName]'");
@@ -72,7 +72,7 @@ std::string stubProcedureBindTemplate(
 {
     std::string str =
 R"(service->addReturnProcedure("[procedureName]", new ReturnProcedure(
-        std::bind(&[stubClassName]::[stubProcedureName], this, _1, _2) [procedureParams]));)";
+        std::bind(&[stubClassName]::[stubProcedureName], this, CPPWEB::_1, CPPWEB::_2) [procedureParams]));)";
 
     replaceAll(str, "[procedureName]", procedureName);
     replaceAll(str, "[stubClassName]", stubClassName);
@@ -89,7 +89,7 @@ std::string stubNotifyBindTemplate(
 {
     std::string str =
 R"(service->addNotifyProcedure("[notifyName]", new NotifyProcedure(
-        std::bind(&[stubClassName]::[stubNotifyName], this, _1) [notifyParams]));)";
+        std::bind(&[stubClassName]::[stubNotifyName], this, CPPWEB::_1) [notifyParams]));)";
 
     replaceAll(str, "[notifyName]", notifyName);
     replaceAll(str, "[stubClassName]", stubClassName);

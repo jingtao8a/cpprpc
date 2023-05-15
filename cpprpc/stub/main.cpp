@@ -1,4 +1,5 @@
 #include <cpprpc/stub/ServiceStubGenerator.hpp>
+#include <cpprpc/stub/ClientStubGenerator.hpp>
 #include <cpprpc/stub/StubGenerator.hpp>
 #include <cpprpc/Exception.hpp>
 #include <cppjson/FileReadStream.hpp>
@@ -32,8 +33,7 @@ static std::unique_ptr<CPPRPC::StubGenerator> makeGenerator(bool serverSide, cpp
         return std::make_unique<CPPRPC::ServiceStubGenerator>(proto);
     }
     else {
-        // return std::make_unique<CPPRPC::ClientStubGenerator>(proto);
-        return nullptr;
+        return std::make_unique<CPPRPC::ClientStubGenerator>(proto);
     }
 }
 

@@ -28,7 +28,8 @@ private:
             initProcedure(nameAndTypes...);
         }
     }
-
+    
+    void initProcedure() {}
 protected:
     bool validateGeneric(cppjson::Value& reqeust) const;
 
