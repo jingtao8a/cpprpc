@@ -8,3 +8,4 @@ add_executable(testException testException.cpp)
 target_link_libraries(testException cpprpc)
 
 add_subdirectory(echo)
+add_subdirectory(add)

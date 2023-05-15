@@ -87,7 +87,7 @@ void RpcServer::handleSingleNotify(cppjson::Value& request) {
     if (it == m_serviceList.end()) {
         throw NotifyException(RPC_METHOD_NOT_FOUND, "service not found");
     }
-    methodName = methodName.substr(pos);
+    methodName = methodName.substr(pos + 1);
     if (methodName.length() == 0) {
         throw NotifyException(RPC_INVALID_REQUEST, "missing method name in method");
     }
@@ -108,7 +108,7 @@ void RpcServer::handleSingleRequest(cppjson::Value& request, const RpcDoneCallba
     if (it == m_serviceList.end()) {
         throw RequestException(RPC_METHOD_NOT_FOUND, id, "service not found");
     }
-    methodName = methodName.substr(pos);
+    methodName = methodName.substr(pos + 1);
     if (methodName.length() == 0) {
         throw RequestException(RPC_INVALID_REQUEST, id, "missing method name in method");
     }

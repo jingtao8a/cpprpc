@@ -1,0 +1,6 @@
+add_executable(ArithmeticClient ArithmeticClient.cpp)
+target_link_libraries(ArithmeticClient cpprpc)
+
+add_executable(ArithmeticService ArithmeticService.cpp)
+target_link_libraries(ArithmeticService cpprpc)
+

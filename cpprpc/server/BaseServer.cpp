@@ -94,7 +94,7 @@ void BaseServer::handleMessage(const CPPWEB::TCPConnectionPtr& conn, CPPWEB::Buf
             } else {
                 TRACE(logger, "BaseServer::handleMessage() %s notify success", conn->peer().toIpPort().c_str());
             }
-        });
+        });//json , RpcDoneCallback
     }
 }
 

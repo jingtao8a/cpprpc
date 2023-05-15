@@ -10,8 +10,7 @@ void run(CPPRPC::EchoClientStub& client) {
     client.Echo(str, [](cppjson::Value response, bool isError, bool timeout) {
         if (!isError) {
             std::cout << "response: " << response.getString() << "\n";
-        }
-        else if (timeout) {
+        } else if (timeout) {
             std::cout << "timeout\n";
         } else {
             std::cout << "response: "

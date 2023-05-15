@@ -1,0 +1,13 @@
+{
+    "name":"Arithmetic",
+    "rpc":[
+        {
+            "name":"add",
+            "params":{
+                "left_value":1,
+                "right_value":2
+            },
+            "returns":3
+        }
+    ]
+}
