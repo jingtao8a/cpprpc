@@ -35,6 +35,7 @@ static cppjson::Value& findValue(cppjson::Value& value, const char* key, cppjson
 void BaseClient::sendCall(const CPPWEB::TCPConnectionPtr& conn, cppjson::Value& call, const ResponseCallback& cb) {
     call.addMember(cppjson::Value("id"), cppjson::Value(m_id));
     m_callbacks[m_id] = cb;
+    m_id++;
     sendRequest(conn, call);
 }
 
