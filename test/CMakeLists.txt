@@ -9,3 +9,4 @@ target_link_libraries(testException cpprpc)
 
 add_subdirectory(echo)
 add_subdirectory(add)
+add_subdirectory(notify)

@@ -106,13 +106,13 @@ std::string notifyDefineTemplate(
     std::string str = R"(
 void [notifyName]([notifyArgs])
 {
-    json::Value params(cppjson::TYPE_OBJECT);
+    cppjson::Value params(cppjson::TYPE_OBJECT);
     [paramMembers]
 
-    json::Value notify(cppjson::Valuejson::TYPE_OBJECT);
+    cppjson::Value notify(cppjson::TYPE_OBJECT);
     notify.addMember(cppjson::Value("jsonrpc"), cppjson::Value("2.0"));
-    notify.addMember(cppjson::Value("method"), cppjson::Value("Hello.Goodbye"));
-
+    notify.addMember(cppjson::Value("method"), cppjson::Value("[serviceName].[notifyName]"));
+    notify.addMember(cppjson::Value("params"), cppjson::Value(params));
     assert(m_conn != nullptr);
     m_client.sendNotify(m_conn, notify);
 }

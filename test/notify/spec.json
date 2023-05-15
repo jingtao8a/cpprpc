@@ -1,0 +1,17 @@
+{
+    "name":"notify",
+    "rpc":[
+        {
+            "name":"hello",
+            "params": {
+                "xingming":"yuxintao"
+            }
+        },
+        {
+            "name":"goodbye",
+            "params": {
+                "xingming":"yuxintao"
+            }
+        }
+    ]
+}

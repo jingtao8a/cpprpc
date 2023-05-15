@@ -1,0 +1,5 @@
+add_executable(notifyClient notifyClient.cpp)
+target_link_libraries(notifyClient cpprpc)
+
+add_executable(notifyService notifyService.cpp)
+target_link_libraries(notifyService cpprpc)

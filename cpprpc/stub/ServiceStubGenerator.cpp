@@ -155,16 +155,18 @@ void [stubNotifyName](cppjson::Value& request) {
 
     if (params.isArray()) {
         [paramsFromJsonArray]
-        convert().[NotifyName]([notifyArgs]);
+        convert().[notifyName]([notifyArgs]);
     } else {
         [paramsFromJsonObject]
-        convert().[NotifyName]([notifyArgs]);
+        convert().[notifyName]([notifyArgs]);
     }
 }
 )";
 
     replaceAll(str, "[notifyName]", notifyName);
     replaceAll(str, "[stubNotifyName]", stubNotifyName);
+    const_cast<std::string&>(notifyArgs).pop_back();
+    const_cast<std::string&>(notifyArgs).pop_back();//去除最后一个逗号
     replaceAll(str, "[notifyArgs]", notifyArgs);
     replaceAll(str, "[paramsFromJsonArray]", paramsFromJsonArray);
     replaceAll(str, "[paramsFromJsonObject]", paramsFromJsonObject);
